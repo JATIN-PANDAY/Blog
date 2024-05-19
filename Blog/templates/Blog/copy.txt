@@ -1,0 +1,41 @@
+from django.db import models
+
+class Blog(models.Model):
+    # Your existing fields and definitions here
+
+    def count_comments(self):
+        return self.comments.filter(approved=True).count()
+
+    @property
+    def is_popular(self):
+        return self.count_comments() >= 5
+
+
+Views 
+
+from django.shortcuts import render
+from .models import Blog
+
+def popular_posts(request):
+    popular_posts = Blog.objects.filter(is_popular=True)
+    return render(request, 'popular_posts.html', {'popular_posts': popular_posts})
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Your HTML head content here -->
+</head>
+<body>
+    <h1>Popular Posts</h1>
+    <ul>
+        {% for post in popular_posts %}
+            <li>
+                <a href="{% url 'blog_detail' post.pk %}">{{ post.title }}</a>
+                ({{ post.count_comments }} comments)
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

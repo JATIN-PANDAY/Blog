@@ -1,0 +1,155 @@
+{%extends 'Blog/base.html'%}
+
+{%load static%}
+
+
+{%block body%}
+
+  <body>
+  
+    <!--================ Start banner Area =================-->
+    <section class="home-banner-area relative">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="owl-carousel home-banner-owl">
+            <div class="banner-img">
+              <img class="img-fluid" src="{% static 'img/banner/b1.jpg'%}" alt="" />
+              <div class="text-wrapper">
+                <a href="#" class="d-flex">
+                  <h1>
+                    Make the world a better place <br />
+                    with camera
+                  </h1>
+                </a>
+              </div>
+            </div>
+            <div class="banner-img">
+              <img class="img-fluid" src="{% static 'img/banner/b2.jpg'%}" alt="" />
+              <div class="text-wrapper">
+                <a href="#" class="d-flex">
+                  <h1>
+                    Make the world a better place <br />
+                    with camera
+                  </h1>
+                </a>
+              </div>
+            </div>
+            <div class="banner-img">
+              <img class="img-fluid" src="{% static 'img/banner/b1.jpg'%}" alt="" />
+              <div class="text-wrapper">
+                <a href="#" class="d-flex">
+                  <h1>
+                    Make the world a better place <br />
+                    with camera
+                  </h1>
+                </a>
+              </div>
+            </div>
+            <div class="banner-img">
+              <img class="img-fluid" src="{% static 'img/banner/b2.jpg'%}" alt="" />
+              <div class="text-wrapper">
+                <a href="#" class="d-flex">
+                  <h1>
+                    Make the world a better place <br />
+                    with camera
+                  </h1>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="social-icons">
+        <ul>
+          <li>
+            <a href="index.html"><i class="fa fa-facebook"></i></a>
+          </li>
+          <li>
+            <a href="index.html"><i class="fa fa-twitter"></i></a>
+          </li>
+          <li>
+            <a href="index.html"><i class="fa fa-pinterest"></i></a>
+          </li>
+          <li class="diffrent">sharre now</li>
+        </ul>
+      </div>
+    </section>
+    <!--================ End banner Area =================-->
+
+    <!--================ Start Blog Post Area =================-->
+    <section class="blog-post-area section-gap relative">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="row">
+
+
+
+
+
+
+
+
+{% if search_results%}
+
+{%for i in search_results%}
+
+<div class="col-lg-6 col-md-4">
+  <div class="single-amenities">
+    <div class="amenities-thumb">
+      <img
+        class="img-fluid w-100"
+        src="/media/{{i.image}}"
+        alt=""
+      />
+    </div>
+    <div class="amenities-details">
+      <h5>
+        
+          {{i.title}}
+        
+      </h5>
+      <div class="amenities-meta mb-10">
+        <a href="#" class=""
+          ><span class="ti-calendar"></span>{{i.created_at}}</a
+        >
+        <a href="#" class="ml-20"
+          ><span class="ti-comment"></span>05</a
+        >
+      </div>
+      <p>
+        
+        {{i.content|slice:'100'}}...                        <a href="{% url 'single_blog' i.uid %}" class="blog-post-btn">
+         
+      </p>
+
+      <div class="d-flex justify-content-between mt-20">
+        <div>
+          <a href="{% url 'single_blog' i.uid %}" class="blog-post-btn">
+            Read More <span class="ti-arrow-right"></span>
+          </a>
+        </div>
+        <div class="category">
+          <a href="#">
+            <span class="ti-folder mr-1"></span>{{i.category}}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+{%endfor%}
+
+{%else%}
+
+<h1 class="text-dark" >No results found.</h1>
+{%endif%}
+
+
+</section>
+<!--================ End Blog Post Area =================-->
+{%endblock body%}
+
+

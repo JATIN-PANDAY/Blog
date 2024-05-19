@@ -1,0 +1,70 @@
+{%extends 'Blog/base.html'%}
+
+
+
+{%block body%}
+<section class="banner-area relative">
+    <div class="overlay overlay-bg"></div>
+    <div class="banner-content text-center">
+      <h1>        Unleash Your Imagination:
+    </h1>
+      <p>
+        <br />
+        Discover Innovative and Captivating Creations Aligned with Your Passions!      </p>
+    </div>
+  </section>
+  <!--================ End banner Area =================-->
+
+<!--================ Start Blog Post Form Area =================-->
+
+<div class="container">
+    
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %} mt-5" role="alert">
+ {{message}}
+  </div>
+  {% endfor %}
+{% endif %}
+
+    <div class="section-gap">
+        <form action="{% url 'postblog' %}" method="post" enctype="multipart/form-data" class="mt-5">
+            {% csrf_token %}
+            <!-- Author Name -->
+            <div class="form-group">
+                <label for="authorName">Author Name:</label>
+                <input type="text" id="authorName" name="authorName" class="form-control" value="{{name}}" readonly>
+            </div>
+
+            <!-- Blog Title -->
+            <div class="form-group">
+                <label for="blogTitle">Blog Title:</label>
+                <input type="text" id="blogTitle" name="blogTitle" class="form-control" required>
+            </div>
+
+                        <!-- Blog category -->
+                        <div class="form-group">
+                            <label for="blogcategory">Blog Category:</label>
+                            <input type="text" id="blogCategory" name="blogCategory" class="form-control" required>
+                        </div>
+            
+            <!-- Blog Content -->
+            <div class="form-group">
+                <label for="blogContent">Content:</label>
+                <textarea id="blogContent" name="blogContent" rows="10" class="form-control" required></textarea>
+            </div>
+
+            <!-- Blog Image (Optional) -->
+            <div class="form-group">
+                <label for="blogImage">Blog Image (URL or upload):</label>
+                <input type="file" id="blogImage" name="blogImage" class="form-control">
+            </div>
+
+            <button class="genric-btn success" type="submit">Submit</button>
+
+
+        </form>
+    </div>
+</div>
+<!--================ End Blog Post Form Area =================-->
+{%endblock body%}
